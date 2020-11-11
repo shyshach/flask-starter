@@ -38,4 +38,6 @@ def logs():
 @task
 def migrate():
     """Add migrations and update db."""
-    local(f"{DC} exec app flask db init && flask db migrate && flask db upgrade")
+    local(
+        f"{DC} exec app flask db init && flask db migrate && flask db upgrade"
+    )
