@@ -1,10 +1,13 @@
 from . import db
 import datetime
 
+TABLE_ID = db.Sequence('autoid', start=1)
+
 
 class RevokedTokenModel(db.Model):
     __tablename__ = 'revoked_tokens'
-    id_ = db.Column(db.Integer, primary_key=True)
+
+    id = db.Column(db.Integer, TABLE_ID, primary_key=True, server_default=TABLE_ID.next_value())
     jti = db.Column(db.String(120))
     blacklisted_on = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
