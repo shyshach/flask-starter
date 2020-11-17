@@ -14,21 +14,6 @@ class User(Resource):
 
 
 class UserList(Resource):
-
-    def post(self):
-        """Create user."""
-        request_json = request.get_json(silent=True)
-        username: str = request_json['username']
-        avatar_url: str = request_json.get('avatar_url', '')
-        password: str = request_json.get('password')
-        try:
-            user = UserRepository.create(username, avatar_url, password)
-            return user, 200
-        except Exception as e:
-            response = jsonify(e.to_dict())
-            response.status_code = e.status_code
-            return response
-
     def get(self):
         """ Get users list."""
         users_query = UserRepository.all()

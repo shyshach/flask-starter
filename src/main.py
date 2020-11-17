@@ -15,8 +15,8 @@ api.add_resource(HealthCheck, '/healthcheck')
 api.add_resource(User, '/api/users/<username>')
 api.add_resource(UserList, '/api/users/')
 api.add_resource(UserLogin, '/api/login')
-api.add_resource(UserLogoutAccess, '/api/logout_by_access')
-api.add_resource(UserLogoutRefresh, '/api/logout_by_refresh')
+api.add_resource(UserLogoutAccess, '/api/logout_access')
+api.add_resource(UserLogoutRefresh, '/api/logout_refresh')
 api.add_resource(TokenRefresh, '/api/refresh')
 
 
