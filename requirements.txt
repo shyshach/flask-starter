@@ -41,3 +41,5 @@ typed-ast==1.4.1
 typing-extensions==3.7.4.3
 urllib3==1.25.11
 Werkzeug==1.0.1
+Flask-JWT-Extended==3.25.0
+passlib==1.7.4

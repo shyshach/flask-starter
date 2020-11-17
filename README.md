@@ -20,6 +20,7 @@ export POSTGRES_URL="127.0.0.1:5432"
 export POSTGRES_DB="mydb"
 export POSTGRES_USER="postgres"
 export POSTGRES_PASSWORD="example"
+export JWT_SECRET_KEY="super-secret"
 ```
 
 ## Run migrations

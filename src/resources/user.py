@@ -17,8 +17,9 @@ class UserList(Resource):
         request_json = request.get_json(silent=True)
         username: str = request_json['username']
         avatar_url: str = request_json.get('avatar_url', '')
+        password: str = request_json.get('password', 'None')
         try:
-            user = UserRepository.create(username, avatar_url)
+            user = UserRepository.create(username, avatar_url, password)
             return user, 200
         except Exception as e:
             response = jsonify(e.to_dict())
@@ -35,7 +36,8 @@ class UserList(Resource):
                     {
                         'username': user.username,
                         'avatar': user.avatar_url,
-                        'created': str(user.date_created),
+                        'created': str(user.date_created)
+
                     }
                 )
         else:
