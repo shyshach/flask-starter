@@ -1,10 +1,9 @@
-from flask import request, jsonify
+from flask import request
 from flask_restful import Resource
 from flask_jwt_extended import (create_access_token, create_refresh_token,
-    jwt_required, jwt_refresh_token_required, get_jwt_identity, get_raw_jwt)
+                                jwt_required, jwt_refresh_token_required, get_jwt_identity, get_raw_jwt)
 from repositories import UserRepository
 from models.revoked_token_model import RevokedTokenModel
-
 
 
 class User(Resource):
@@ -37,7 +36,6 @@ class UserLogin(Resource):
     def post(self):
         request_json = request.get_json(silent=True)
         username: str = request_json['username']
-        avatar_url: str = request_json.get('avatar_url', '')
         password: str = request_json.get('password')
         # lookup by username
         if UserRepository.get(username):
@@ -48,11 +46,9 @@ class UserLogin(Resource):
         if UserRepository.verify_hash(password, current_user["password"]):
             access_token = create_access_token(identity=username)
             refresh_token = create_refresh_token(identity=username)
-            return {
-                "message": "Logged in as {}".format(current_user["username"]),
-                'access_token': access_token,
-                'refresh_token': refresh_token
-            }, 200
+            return {'message': 'Logged in as {}'.format(current_user["username"]),
+                    'access_token': access_token,
+                    'refresh_token': refresh_token}, 200
         else:
             return {"message": "Wrong password"}, 401
 
@@ -67,7 +63,6 @@ class UserLogoutAccess(Resource):
             return {'message': 'Access token has been revoked'}, 200
         except:
             return {"message": "Something went wrong while revoking token"}, 500
-
 
 
 class UserLogoutRefresh(Resource):

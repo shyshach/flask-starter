@@ -15,4 +15,3 @@ class User(db.Model, BaseModel):
         self.username = username
         self.avatar_url = avatar_url
         self.password = password
-

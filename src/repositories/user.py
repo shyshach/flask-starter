@@ -37,12 +37,10 @@ class UserRepository:
         """ Query a user by username """
         user: dict = {}
         user = User.query.filter_by(username=username).first_or_404()
-        user = {
-          'username': user.username,
-          'date_created': str(user.date_created),
-            "avatar_url": str(user.avatar_url),
-            'password': str(user.password)
-        }
+        user = {'username': user.username,
+                'date_created': str(user.date_created),
+                "avatar_url": str(user.avatar_url),
+                'password': str(user.password)}
         return user
 
     @staticmethod
@@ -58,5 +56,3 @@ class UserRepository:
     @staticmethod
     def verify_hash(password, hash):
         return sha256.verify(password, hash)
-
-
