@@ -39,5 +39,5 @@ def logs():
 def migrate():
     """Add migrations and update db."""
     local(
-        f"{DC} exec app flask db init && flask db migrate && flask db upgrade"
+        f"{DC} exec app /bin/bash ./scripts/run_migrations.sh"
     )
