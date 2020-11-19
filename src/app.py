@@ -10,19 +10,19 @@ db = SQLAlchemy()
 
 def setup_jwt(app):
     if os.environ.get("JWT_SECRET_KEY"):
-        app.config['JWT_SECRET_KEY'] = os.environ.get("JWT_SECRET_KEY")
+        app.config["JWT_SECRET_KEY"] = os.environ.get("JWT_SECRET_KEY")
     else:
-        app.config['JWT_SECRET_KEY'] = "jwt-secret-key"
+        app.config["JWT_SECRET_KEY"] = "jwt-secret-key"
     jwt = JWTManager(app)
 
-    app.config['JWT_BLACKLIST_ENABLED'] = True
-    app.config['JWT_BLACKLIST_TOKEN_CHECKS'] = ['access', 'refresh']
+    app.config["JWT_BLACKLIST_ENABLED"] = True
+    app.config["JWT_BLACKLIST_TOKEN_CHECKS"] = ["access", "refresh"]
 
     from models.revoked_token_model import RevokedTokenModel
 
     @jwt.token_in_blacklist_loader
     def check_if_token_in_blacklist(decrypted_token):
-        jti = decrypted_token['jti']
+        jti = decrypted_token["jti"]
         return RevokedTokenModel.is_jti_blacklisted(jti)
 
 
