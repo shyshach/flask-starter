@@ -9,10 +9,7 @@ db = SQLAlchemy()
 
 
 def setup_jwt(app):
-    if os.environ.get("JWT_SECRET_KEY"):
-        app.config["JWT_SECRET_KEY"] = os.environ.get("JWT_SECRET_KEY")
-    else:
-        app.config["JWT_SECRET_KEY"] = "jwt-secret-key"
+    app.config["JWT_SECRET_KEY"] = os.getenv("JWT_SECRET_KEY", "jwt-secret-key")
     jwt = JWTManager(app)
 
     app.config["JWT_BLACKLIST_ENABLED"] = True
